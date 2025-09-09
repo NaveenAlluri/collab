@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Khana Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #f9f9f9;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background-color: #ff6b00;
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 40px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      margin: 15px 0;
+      display: block;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      color: #333;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+    }
+
+    .profile img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-left: 10px;
+    }
+
+    /* Dashboard cards */
+    .cards {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      flex: 1 1 200px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 24px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    /* Orders table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #ff6b00;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+
+      .main {
+        padding: 10px;
+      }
+
+      .cards {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Khana</h2>
+    <a href="#">Dashboard</a>
+    <a href="#">Orders</a>
+    <a href="#">Menu</a>
+    <a href="#">Customers</a>
+    <a href="#">Settings</a>
+    <a href="#">Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <div class="header">
+      <h1>Dashboard</h1>
+      <div class="profile">
+        <span>Admin</span>
+        <img src="https://i.pravatar.cc/40" alt="Profile" />
+      </div>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="cards">
+      <div class="card">
+        <h3>Total Orders</h3>
+        <p id="totalOrders">0</p>
+      </div>
+      <div class="card">
+        <h3>Revenue</h3>
+        <p id="revenue">₹0</p>
+      </div>
+      <div class="card">
+        <h3>Customers</h3>
+        <p id="customers">0</p>
+      </div>
+    </div>
+
+    <!-- Recent Orders -->
+    <h2>Recent Orders</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Item</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="orderTable">
+        <!-- JS will inject rows here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Sample data (would be from backend in real app)
+    const dashboardData = {
+      totalOrders: 245,
+      revenue: 73890,
+      customers: 180
+    };
+
+    const orders = [
+      { id: 'OD001', customer: 'Aman Singh', item: 'Paneer Tikka', amount: 299, status: 'Delivered' },
+      { id: 'OD002', customer: 'Sneha Roy', item: 'Butter Chicken', amount: 349, status: 'On the way' },
+      { id: 'OD003', customer: 'Vikas Sharma', item: 'Veg Biryani', amount: 199, status: 'Cancelled' },
+      { id: 'OD004', customer: 'Neha Gupta', item: 'Masala Dosa', amount: 149, status: 'Delivered' }
+    ];
+
+    // Populate dashboard cards
+    document.getElementById('totalOrders').textContent = dashboardData.totalOrders;
+    document.getElementById('revenue').textContent = `₹${dashboardData.revenue}`;
+    document.getElementById('customers').textContent = dashboardData.customers;
+
+    // Populate table
+    const tableBody = document.getElementById('orderTable');
+    orders.forEach(order => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${order.id}</td>
+        <td>${order.customer}</td>
+        <td>${order.item}</td>
+        <td>₹${order.amount}</td>
+        <td>${order.status}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+  </script>
+</body>
+</html>
