@@ -20,6 +20,65 @@
     .section { display: none; animation: fadeIn 0.5s ease-in-out; }
     .section.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+/* ===== Hero Banner ===== */
+.hero {
+  background: url('https://source.unsplash.com/1600x600/?food,restaurant') no-repeat center center/cover;
+  color: #fff;
+  padding: 100px 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+}
+.hero h1 { font-size: 40px; margin-bottom: 15px; text-shadow: 2px 2px 6px rgba(0,0,0,0.6); }
+.hero p { font-size: 18px; margin-bottom: 20px; text-shadow: 1px 1px 4px rgba(0,0,0,0.6); }
+.hero button {
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  background: #ff7043;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.hero button:hover { background: #ff5722; }
+
+/* ===== Featured Dishes ===== */
+.featured {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.f-card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.3s;
+}
+.f-card:hover { transform: scale(1.05); }
+.f-card img { width: 100%; height: 140px; object-fit: cover; }
+.f-card p { padding: 10px; font-weight: 600; }
+
+/* ===== Why Choose Us ===== */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+.feature-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+.feature-card:hover { transform: translateY(-6px); }
+.feature-card img { width: 60px; margin-bottom: 10px; }
+.feature-card h3 { margin-bottom: 8px; color: #ff7043; }
 
     /* ======== Cards ======== */
     .restaurants, .items { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; margin-top: 20px; }
@@ -68,11 +127,57 @@
 
   <!-- Main Content -->
   <div class="main">
-    <!-- Home -->
-    <div id="home" class="section active">
-      <h1>Welcome to Khana</h1>
-      <p>Your favorite food, delivered fresh to your door.</p>
+<!-- Home -->
+<div id="home" class="section active">
+  <!-- Hero Banner -->
+  <div class="hero">
+    <h1>Delicious Food, Delivered Fast 🍴</h1>
+    <p>Order from your favorite restaurants and get it delivered to your doorstep.</p>
+    <button onclick="showSection('restaurants')">🍕 Order Now</button>
+  </div>
+
+  <!-- Featured Dishes -->
+  <h2 style="margin-top:40px;">Featured Dishes</h2>
+  <div class="featured">
+    <div class="f-card">
+      <img src="https://source.unsplash.com/400x300/?pizza" alt="Pizza">
+      <p>Cheesy Pizza</p>
     </div>
+    <div class="f-card">
+      <img src="https://source.unsplash.com/400x300/?burger" alt="Burger">
+      <p>Juicy Burger</p>
+    </div>
+    <div class="f-card">
+      <img src="https://source.unsplash.com/400x300/?biryani" alt="Biryani">
+      <p>Spicy Biryani</p>
+    </div>
+    <div class="f-card">
+      <img src="https://source.unsplash.com/400x300/?sushi" alt="Sushi">
+      <p>Fresh Sushi</p>
+    </div>
+  </div>
+
+  <!-- Why Choose Us -->
+  <h2 style="margin-top:40px;">Why Choose Khana?</h2>
+  <div class="features">
+    <div class="feature-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3082/3082032.png" alt="Fast Delivery">
+      <h3>Fast Delivery</h3>
+      <p>Get your food delivered hot and fresh in minutes.</p>
+    </div>
+    <div class="feature-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Best Restaurants">
+      <h3>Top Restaurants</h3>
+      <p>We partner with the best restaurants in your city.</p>
+    </div>
+    <div class="feature-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1785/1785346.png" alt="Great Offers">
+      <h3>Exciting Offers</h3>
+      <p>Use coupons and save big on your favorite meals.</p>
+    </div>
+  </div>
+</div>
+
 
     <!-- Restaurants -->
     <div id="restaurants" class="section">
